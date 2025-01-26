@@ -53,7 +53,7 @@ const HopeList = () => {
         const updatedData = data.filter((_, i) => i !== index);
     
         // Send the request to the server
-        const response = await axios.get(`http://localhost:5000/kannur/addtotodaylist/${id}`);
+        const response = await axios.get(`${apiUrl}/${unitName}/addtotodaylist/${id}`);
         
         // Log the server's response for debugging
         console.log("Server Response:", response.message);
@@ -75,7 +75,7 @@ const HopeList = () => {
     event.preventDefault();
     try {
       const load = toast.loading("Loading..");
-      const response = await axios.post(`http://localhost:5000/${unitName}/addtohopelist`, {
+      const response = await axios.post(`${apiUrl}/${unitName}/addtohopelist`, {
         name,
         type,
       });

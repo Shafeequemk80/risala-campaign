@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 
 
 const TodayList = () => {
+  const apiUrl = import.meta.env.VITE_BASE_URL
   const { unitName } = useParams();
   const [name, setName] = useState("");
   const [type, setType] = useState();
@@ -28,7 +29,7 @@ const TodayList = () => {
     const fetchData = async () => {
       try {
         const load = toast.loading("Loading..");
-        const response = await axios.get(`http://localhost:5000/${unitName}/gettodaylist`);
+        const response = await axios.get(`${apiUrl}/${unitName}/gettodaylist`);
         if (response.data.data) {
           toast.dismiss(load);
           setData(response.data.data);
@@ -62,7 +63,7 @@ const TodayList = () => {
         const updatedData = data.filter((_, i) => i !== arg.index);
         
         // Send the request to the server
-        const response = await axios.get(`http://localhost:5000/${unitName}/addtosubscribe/${arg.id}`);
+        const response = await axios.get(`${apiUrl}/${unitName}/addtosubscribe/${arg.id}`);
         setData(updatedData);
         
         // Log the server's response
@@ -89,7 +90,7 @@ const TodayList = () => {
         setData(updatedData);
     
         // Send the request to the server (different endpoint for reject if needed)
-        const response = await axios.get(`http://localhost:5000/${unitName}/addtoRejected/${arg.id}`);
+        const response = await axios.get(`${apiUrl}/${unitName}/addtoRejected/${arg.id}`);
         
         // Log the server's response
         console.log("Server Response:", response.data);

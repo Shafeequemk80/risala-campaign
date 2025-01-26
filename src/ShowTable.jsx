@@ -8,6 +8,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 
 const ShowTable = () => {
+  const apiUrl = import.meta.env.VITE_BASE_URL
   const { unitName } = useParams();
   const [rowsLimit, setRowsLimit] = useState(20); // Dynamic rows limit
     const [currentPage, setCurrentPage] = useState(0);
@@ -22,7 +23,7 @@ const ShowTable = () => {
       const fetchData = async () => {
         try {
           const load = toast.loading("Loading..");
-          const response = await axios.get(`http://localhost:5000/${unitName}/${type}`);
+          const response = await axios.get(`${apiUrl}/${unitName}/${type}`);
           if (response.data.data) {
             toast.dismiss(load);
             setData(response.data.data);

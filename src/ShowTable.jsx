@@ -131,33 +131,40 @@ const ShowTable = () => {
 
         {/* Table */}
         <div className="w-full overflow-x-scroll md:overflow-auto max-w-7xl 2xl:max-w-none mt-2">
-          <table className="min-w-full divide-y divide-gray-200 border">
-            <thead className="bg-[#222E3A]/[6%] text-leftsrc/Table.jsx text-base text-white font-semibold">
-              <tr>
-                <th className="py-3 px-3 text-[#212B36] font-bold">No</th>
-                <th className="py-3 px-3 text-[#212B36] font-bold">Name</th>
-                <th className="py-3 px-3 text-[#212B36] font-bold">Type</th>
-             
-              </tr>
-            </thead>
-            <tbody>
-              {rowsToShow.map((item, index) => (
+        <table className="min-w-full divide-y divide-gray-200 border">
+  <thead className="bg-[#222E3A]/[6%] text-left text-base text-white font-semibold">
+    <tr>
+      <th className="py-3 px-3 text-[#212B36] font-bold">No</th>
+      <th className="py-3 px-3 text-[#212B36] font-bold">Name</th>
+      <th className="py-3 px-3 text-[#212B36] font-bold">Type</th>
+    </tr>
+  </thead>
+          <tbody>
+            {rowsToShow.length > 0 ? (
+              rowsToShow.map((item, index) => (
                 <tr
                   className={`${
                     index % 2 === 0 ? "bg-white" : "bg-[#222E3A]/[6%]"
                   }`}
                   key={`${item.name}-${index}`}
                 >
-                  <td className="py-2 px-3 border-t whitespace-nowrap">
+                  <td className="py-3 px-3 border-t whitespace-nowrap">
                     {currentPage * rowsLimit + index + 1}
                   </td>
-                  <td className="py-2 px-3 border-t whitespace-nowrap">{item.name}</td>
-                  <td className="py-2 px-3 border-t whitespace-nowrap">{item.type}</td>
-                 
+                  <td className="py-3 px-3 border-t whitespace-nowrap">{item.name}</td>
+                  <td className="py-3 px-3 border-t whitespace-nowrap">{item.type}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="py-4 text-center text-gray-500">
+                  No Data Found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
         </div>
 
         {/* Pagination */}

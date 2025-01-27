@@ -107,7 +107,7 @@ const PossibilityList = () => {
     <div className="bg-gray-100">
       <div className="container mx-auto  justify-center  ">
         <div className="flex justify-center">
-          <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">Possibility List</h1>
+          <h1 className="text-4xl font-bold text-purple-700 mt-24 mb-7">Possibility List</h1>
         </div>
         <div className="flex justify-center px-6">
           <form

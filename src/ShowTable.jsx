@@ -110,7 +110,7 @@ const ShowTable = () => {
   return (
     <div className="container mx-auto  justify-center  ">
     <div className="flex justify-center">
-        <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">{type=="gettosubscribe"?"Suscribed List":"Rejected List"}</h1>
+        <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">{type=="gettosubscribe"?(<span className="text-green-700">Subscribed List</span>):"Rejected List"}</h1>
       </div>
     
     <div className="bg-white flex items-center justify-center px-2 pt-10 pb-20">

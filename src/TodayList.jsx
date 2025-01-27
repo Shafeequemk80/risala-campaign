@@ -117,7 +117,7 @@ const TodayList = () => {
      
       <div className="container mx-auto  justify-center  ">
         <div className="flex justify-center">
-          <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">Today List</h1>
+          <h1 className="text-4xl font-bold text-blue-500 mt-24 mb-7">Today List</h1>
         </div>
     <Modal
     isOpen={showModal}

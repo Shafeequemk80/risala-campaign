@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useParams, Navigate } from 'react-router-dom';
 import Home from './Home';
-import HopeList from './HopeList';
+import PossibilityList from './PossibilityList';
 import ShowTable from './ShowTable';
 import TodayList from './TodayList';
 import NotFound from './NotFound'; // Optional: Add a 404 page for invalid routes
@@ -36,8 +36,8 @@ function App() {
           element={<ProtectedRoute element={<Home />} />} 
         />
         <Route 
-          path="/:unitName/hope-list" 
-          element={<ProtectedRoute element={<HopeList />} />} 
+          path="/:unitName/possibility-list" 
+          element={<ProtectedRoute element={<PossibilityList />} />} 
         />
         <Route 
           path="/:unitName/today-list" 

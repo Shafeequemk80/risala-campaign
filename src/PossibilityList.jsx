@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 
 
-const HopeList = () => {
+const PossibilityList = () => {
   const apiUrl = import.meta.env.VITE_BASE_URL
   
   const [name, setName] = useState("");
@@ -63,7 +63,7 @@ const HopeList = () => {
     
       } catch (error) {
         // Handle errors gracefully
-        console.error("Error adding to hope list:", error.message || error);
+        console.error("Error adding to possibility list:", error.message || error);
     
         // Optional: Notify the user about the error
         alert("Failed to add to the today list. Please try again.");
@@ -75,7 +75,7 @@ const HopeList = () => {
     event.preventDefault();
     try {
       const load = toast.loading("Loading..");
-      const response = await axios.post(`${apiUrl}/${unitName}/addtohopelist`, {
+      const response = await axios.post(`${apiUrl}/${unitName}/addtopossibilitylist`, {
         name,
         type,
       });
@@ -107,7 +107,7 @@ const HopeList = () => {
     <div className="bg-gray-100">
       <div className="container mx-auto  justify-center  ">
         <div className="flex justify-center">
-          <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">Hope List</h1>
+          <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">Possibility List</h1>
         </div>
         <div className="flex justify-center px-6">
           <form
@@ -182,4 +182,4 @@ const HopeList = () => {
   );
 };
 
-export default HopeList;
+export default PossibilityList;

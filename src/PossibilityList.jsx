@@ -149,11 +149,14 @@ const PossibilityList = () => {
                 <option value=""selected disabled>
                   Type
                 </option>
-                <option value="Politics">Politics</option>
-                <option value="Sunni leader">Sunni leader</option>
-                <option value="Authes">Authes</option>
+                <option value="Political representative">Political representative</option>
+                <option value="Cultural personality">Cultural personality</option>
                 <option value="Government officer">Government officer</option>
-                <option value="Businessman">Businessman</option>
+                <option value="Expatriate">Expatriate</option>
+                <option value="Organizational family members">Organizational family members</option>
+                <option value="Allied organization leader">Allied organization leader</option>
+                <option value="Sponsor">Sponsor</option>
+
 
               </select>
             </div>

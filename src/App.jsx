@@ -5,6 +5,7 @@ import PossibilityList from './PossibilityList';
 import ShowTable from './ShowTable';
 import TodayList from './TodayList';
 import NotFound from './NotFound'; // Optional: Add a 404 page for invalid routes
+import LandingPage from './LandingPage';
 
 const allowedUnits = import.meta.env.VITE_UNIT_NAME; // Add all your units here
 
@@ -28,7 +29,7 @@ function App() {
     <Router>
       <Routes>
         {/* Base route */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
 
         {/* Dynamic unit routes */}
         <Route 

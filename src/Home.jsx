@@ -39,11 +39,11 @@ function Home() {
   return (
     <div>
       {/* Navbar */}
-      <nav className="bg-light p-4">
+      {/* <nav className="bg-light p-4">
         <a className="flex items-center" href="#">
-        <img src="RISALA.png" width="85" height="30" alt="Risla Logo" />
+        <img src="fevicon.png" width="85" height="30" alt="Risla Logo" />
         </a>
-      </nav>
+      </nav> */}
 
       {/* Centered Image */}
       <div className="flex justify-center">
@@ -61,25 +61,25 @@ function Home() {
       <div className="flex justify-center items-center w-full mt-10">
         <div className="grid grid-cols-2 gap-4">
           <Link to={`/${unitName}/possibility-list`}>
-            <div className="w-[190px] h-[100px] bg-purple-500 flex justify-center items-center text-white rounded-lg shadow-lg">
+            <div className="w-[140px] md:w-[250px] h-[100px] bg-purple-500 flex justify-center items-center text-white rounded-lg shadow-lg">
             Possibility List
             </div>
           </Link>
 
           <Link to={`/${unitName}/today-list`}>
-            <div className="w-[190px] h-[100px] bg-blue-500 flex justify-center items-center text-white rounded-lg shadow-lg">
+            <div className="w-[140px] md:w-[250px] h-[100px] bg-blue-500 flex justify-center items-center text-white rounded-lg shadow-lg">
               Today List
             </div>
           </Link>
 
           <Link to={`/${unitName}/subscribed`} state={{type:"gettosubscribe"}}>
-            <div className="w-[190px] h-[100px] bg-yellow-500 flex justify-center items-center text-black rounded-lg shadow-lg">
+            <div className="w-[140px] md:w-[250px] h-[100px] bg-yellow-500 flex justify-center items-center text-black rounded-lg shadow-lg">
               Subscribed
             </div>
           </Link>
 
           <Link to={`/${unitName}/rejected`} state={{type:"gettoreject"}}>
-            <div className="w-[190px] h-[100px] bg-red-500 flex justify-center items-center text-white rounded-lg shadow-lg">
+            <div className="w-[140px] md:w-[250px] h-[100px] bg-red-500 flex justify-center items-center text-white rounded-lg shadow-lg">
               Rejected
             </div>
           </Link>

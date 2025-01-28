@@ -6,7 +6,7 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section
         className="bg-blue-600 text-white py-20 px-4 text-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/public/banner.jpg')" }}
+        style={{ backgroundImage: "url('banner.jpg')" }}
       >
         {/* <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">

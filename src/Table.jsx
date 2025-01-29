@@ -77,44 +77,51 @@ const Table = ({ data, setData,loading, error,handleAdding, currentPage, setCurr
       <tr>
         <th className="py-3 px-3 text-[#212B36] font-bold">No</th>
         <th className="py-3 px-3 text-[#212B36] font-bold">Name</th>
-        <th className="py-3 px-3 text-[#212B36] font-bold">Type</th>
+        <th className="py-3 px-3  hidden sm:table-cell text-[#212B36] font-bold">Type</th>
         <th className="py-3 px-3 text-[#212B36] font-bold">Add</th>
       </tr>
     </thead>
     <tbody>
-      {/* Check if rowsToShow is empty */}
-      {rowsToShow.length > 0 ? (
-        rowsToShow.map((item, index) => (
-          <tr
-            className={`${
-              index % 2 === 0 ? "bg-white" : "bg-[#222E3A]/[6%]"
-            }`}
-            key={`${item.name}-${index}`}
-          >
-            <td className="py-2 px-3 border-t whitespace-nowrap">
-              {currentPage * rowsLimit + index + 1}
-            </td>
-            <td className="py-2 px-3 border-t whitespace-nowrap">{item.name}</td>
-            <td className="py-2 px-3 border-t whitespace-nowrap">{item.type}</td>
-            <td className="py-2 px-3 border-t whitespace-nowrap">
-              <img
-                width={25}
-                onClick={() => handleAdding(index, item._id)}
-                src="/add.png"
-                alt="Add"
-                className="cursor-pointer"
-              />
-            </td>
-          </tr>
-        ))
-      ) : (
-        <tr>
-          <td colSpan="4" className="py-4 text-center">
-            No Data Found
-          </td>
-        </tr>
-      )}
-    </tbody>
+  {rowsToShow.length > 0 ? (
+    rowsToShow.map((item, index) => (
+      <tr
+        className={`${
+          index % 2 === 0 ? "bg-white" : "bg-[#222E3A]/[6%]"
+        }`}
+        key={`${item.name}-${index}`}
+      >
+        <td className="py-2 px-3 border-t whitespace-nowrap">
+          {currentPage * rowsLimit + index + 1}
+        </td>
+        <td className="py-2 px-3 border-t whitespace-nowrap">
+          {item.name}
+          {/* Show Type below Name in mobile view */}
+          <div className="sm:hidden text-sm text-gray-600">{item.type}</div>
+        </td>
+        {/* Hide Type column on mobile */}
+        <td className="py-2 px-3 border-t whitespace-nowrap hidden sm:table-cell">
+          {item.type}
+        </td>
+        <td className="py-2 px-3 border-t whitespace-nowrap">
+          <img
+            width={25}
+            onClick={() => handleAdding(index, item._id)}
+            src="/add.png"
+            alt="Add"
+            className="cursor-pointer"
+          />
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="4" className="py-4 text-center">
+        No Data Found
+      </td>
+    </tr>
+  )}
+</tbody>
+
   </table>
 </div>
 

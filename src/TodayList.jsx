@@ -131,6 +131,7 @@ const TodayList = () => {
           handleAdding={handleAdding}
           error={error}
           setData={setData}
+          type={'t'}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Spinner } from "@material-tailwind/react";
 import axios from "axios";
 
-const Table = ({ data, setData,loading, error,handleAdding, currentPage, setCurrentPage }) => {
+const Table = ({ data, setData,loading, error,handleAdding, currentPage, setCurrentPage,type }) => {
   const [rowsLimit, setRowsLimit] = useState(20); // Dynamic rows limit
 
   // Calculate total pages based on the data length
@@ -78,7 +78,11 @@ const Table = ({ data, setData,loading, error,handleAdding, currentPage, setCurr
         <th className="py-3 px-3 text-[#212B36] font-bold">No</th>
         <th className="py-3 px-3 text-[#212B36] font-bold">Name</th>
         <th className="py-3 px-3  hidden sm:table-cell text-[#212B36] font-bold">Type</th>
-        <th className="py-3 px-3 text-[#212B36] font-bold">Add</th>
+    <div className="text-center sm:w-full w-24 ">
+    <th className="py-3   flex justify- text-[#212B36] font-bold">
+  {type === "p" ? `Add to Today List` : "Add to Final List"}
+</th>
+    </div>
       </tr>
     </thead>
     <tbody>
@@ -102,7 +106,7 @@ const Table = ({ data, setData,loading, error,handleAdding, currentPage, setCurr
         <td className="py-2 px-3 border-t whitespace-nowrap hidden sm:table-cell">
           {item.type}
         </td>
-        <td className="py-2 px-3 border-t whitespace-nowrap">
+        <td className="py-2 px-3 flex justify-center border-t whitespace-nowrap">
           <img
             width={25}
             onClick={() => handleAdding(index, item._id)}

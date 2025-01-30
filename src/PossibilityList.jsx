@@ -175,6 +175,7 @@ const PossibilityList = () => {
           handleAdding={handleAdding}
           error={error}
           setData={setData}
+          type={'p'}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

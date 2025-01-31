@@ -5,16 +5,18 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
 
+import { BeatLoader } from "react-spinners";
 
 
 const ShowTable = () => {
   const apiUrl = import.meta.env.VITE_BASE_URL
   const { unitName } = useParams();
   const [rowsLimit, setRowsLimit] = useState(20); // Dynamic rows limit
-    const [currentPage, setCurrentPage] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(0);
-    const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(0);
+  const [data, setData] = useState([]);
+  const [spinner, setSpin] = useState(false);
 
 
     const location =useLocation()
@@ -22,22 +24,24 @@ const ShowTable = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const load = toast.loading("Loading..");
+          setSpin(true)
           const response = await axios.get(`${apiUrl}/${unitName}/${type}`);
           if (response.data.data) {
-            toast.dismiss(load);
+           
             setData(response.data.data);
             // setCount(response.data.length);
           } else {
             console.error("Received data is not an array:", response.data);
             setError("Unexpected data format");
           }
-          setLoading(false);
+         
         } catch (err) {
-          setError(err.message);
-          setLoading(false);
-          toast.dismiss();
-          toast.error("Error loading data");
+     console.log(err.message)
+         
+          
+        }finally{
+          setSpin(false)
+
         }
       };
   
@@ -107,7 +111,11 @@ const ShowTable = () => {
     );
   }
 
-  return (
+  return  spinner ? (
+    <div className="flex justify-center items-center h-screen">
+    <BeatLoader color="#0024e0"/>
+  </div>
+  ): (
     <div className="container mx-auto  justify-center  ">
     <div className="flex justify-center">
         <h1 className="text-4xl font-bold text-red-700 mt-24 mb-7">{type=="gettosubscribe"?(<span className="text-green-700">Subscribed List</span>):"Rejected List"}</h1>

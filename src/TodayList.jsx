@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "./Modal";
 import { useParams } from "react-router-dom";
-
+import { BeatLoader } from "react-spinners";
 
 
 
@@ -22,28 +22,31 @@ const TodayList = () => {
   const [arg, setArg] = useState({index:'', id:""});
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-
+  const [spinner, setSpin] = useState(false);
   const rowsLimit = 20;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const load = toast.loading("Loading..");
+        setSpin( true)
         const response = await axios.get(`${apiUrl}/${unitName}/gettodaylist`);
         if (response.data.data) {
-          toast.dismiss(load);
+     
           setData(response.data.data);
           setCount(response.data.length);
         } else {
           console.error("Received data is not an array:", response.data);
           setError("Unexpected data format");
         }
-        setLoading(false);
+       
       } catch (err) {
         setError(err.message);
-        setLoading(false);
+      
         toast.dismiss();
         toast.error("Error loading data");
+      }finally{
+        setSpin(false)
+
       }
     };
 
@@ -112,7 +115,11 @@ const TodayList = () => {
 
 
 
-  return (
+  return spinner ? (
+    <div className="flex justify-center items-center h-screen">
+    <BeatLoader color="#059227" />
+  </div>
+  ): (
     <div className="bg-gray-100">
      
       <div className="container mx-auto  justify-center  ">

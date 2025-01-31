@@ -4,7 +4,7 @@ import Table from "./Table";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
-
+import { BeatLoader } from "react-spinners";
 
 const PossibilityList = () => {
   const apiUrl = import.meta.env.VITE_BASE_URL
@@ -12,6 +12,7 @@ const PossibilityList = () => {
   const [name, setName] = useState("");
   const [type, setType] = useState();
   const [loading, setLoading] = useState(false);
+  const [spinner, setSpin] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
   const [count, setCount] = useState(0);
@@ -23,38 +24,37 @@ const PossibilityList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const load = toast.loading("Loading..");
+        setSpin(true);
         const response = await axios.get(`${apiUrl}/${unitName}/gethoplist`);
-        if (response.data.data) {
-          toast.dismiss(load);
+        if (Array.isArray(response.data.data)) { // Ensure it's an array
           setData(response.data.data);
-          setCount(response.data.length);
+          setCount(response.data.data.length);
         } else {
           console.error("Received data is not an array:", response.data);
           setError("Unexpected data format");
         }
-        setLoading(false);
       } catch (err) {
         setError(err.message);
-        setLoading(false);
-        toast.dismiss();
         toast.error("Error loading data");
+      } finally {
+        setSpin(false);
       }
     };
-
-    fetchData();
-  }, []);
-
+  
+    if (unitName) fetchData();
+  }, [apiUrl, unitName]); // Dependencies added
+  
   const handleAdding = async (index, id) => {
       try {
         console.log("Total Pages:", index,id);
     
         // Optimistically remove the item from the data
         const updatedData = data.filter((_, i) => i !== index);
-    
+        
         // Send the request to the server
         const response = await axios.get(`${apiUrl}/${unitName}/addtotodaylist/${id}`);
-        
+       
+
         // Log the server's response for debugging
         console.log("Server Response:", response.message);
         setData(updatedData);
@@ -64,7 +64,7 @@ const PossibilityList = () => {
       } catch (error) {
         // Handle errors gracefully
         console.error("Error adding to possibility list:", error.message || error);
-    
+      
         // Optional: Notify the user about the error
         alert("Failed to add to the today list. Please try again.");
       }
@@ -96,30 +96,26 @@ const PossibilityList = () => {
       setType("");
     } catch (error) {
       console.error("Error sending data:", error);
-      toast.dismiss();
-      toast.error("Error sending data");
+  toast.dismiss(load); // Ensure load is dismissed correctly
+  toast.error("Error sending data");
     }
   };
 
 
-
-  return (
+  return spinner ? (
+    <div className="flex justify-center items-center h-screen">
+    <BeatLoader color="#059227" />
+  </div>
+  ): (
     <div className="bg-gray-100">
-      <div className="container mx-auto  justify-center  ">
+      <div className="container mx-auto justify-center">
         <div className="flex justify-center">
           <h1 className="text-4xl font-bold text-purple-700 mt-24 mb-7">Possibility List</h1>
         </div>
         <div className="flex justify-center px-6">
-          <form
-            id="nameForm"
-            className="w-full max-w-md"
-            onSubmit={handleSubmit}
-          >
+          <form id="nameForm" className="w-full max-w-md" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label
-                htmlFor="nameInput"
-                className="block text-sm font-medium mb-1"
-              >
+              <label htmlFor="nameInput" className="block text-sm font-medium mb-1">
                 Enter name:
               </label>
               <input
@@ -133,10 +129,7 @@ const PossibilityList = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="myDropdown"
-                className="block text-sm font-medium mb-1"
-              >
+              <label htmlFor="myDropdown" className="block text-sm font-medium mb-1">
                 Select Type:
               </label>
               <select
@@ -146,7 +139,7 @@ const PossibilityList = () => {
                 onChange={(e) => setType(e.target.value)}
                 required
               >
-                <option value=""selected disabled>
+                <option value="" disabled>
                   Type
                 </option>
                 <option value="Political representative">Political representative</option>
@@ -156,8 +149,6 @@ const PossibilityList = () => {
                 <option value="Organizational family members">Organizational family members</option>
                 <option value="Allied organization leader">Allied organization leader</option>
                 <option value="Sponsor">Sponsor</option>
-
-
               </select>
             </div>
             <button
@@ -179,11 +170,10 @@ const PossibilityList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
-
       </div>
     </div>
-
-  );
+  )
+  
 };
 
 export default PossibilityList;
